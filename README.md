@@ -1,6 +1,7 @@
 import Foundation
 
 // Defining the neural network model
+
 class NeuralNetwork {
     var weights: [[Double]]
     
