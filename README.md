@@ -1,80 +1,15 @@
-import Foundation
+This code implements a simple neural network with one hidden layer using the sigmoid activation function. The network is trained on a simple dataset of inputs and expected outputs and then tested on new inputs.
 
-// Defining the neural network model
+The neural network model is defined using a NeuralNetwork class. The weights of the network are stored in a 2D array weights. The init() method initializes the weights with some default values.
 
-class NeuralNetwork {
-    var weights: [[Double]]
-    
-    init() {
-        weights = [
-            [0.5, 0.2],
-            [-0.3, 0.8]
-        ]
-    }
-    
-    func feedForward(inputs: [Double]) -> Double {
-        let output = sigmoid(dotProduct(weights, inputs))
-        return output
-    }
-    
-    func train(inputs: [Double], target: Double, learningRate: Double) {
-        let output = feedForward(inputs: inputs)
-        let error = target - output
-        
-        for i in 0..<weights.count {
-            for j in 0..<weights[i].count {
-                weights[i][j] += learningRate * error * inputs[j]
-            }
-        }
-    }
-    
-    func sigmoid(_ x: Double) -> Double {
-        return 1.0 / (1.0 + exp(-x))
-    }
-    
-    func dotProduct(_ a: [[Double]], _ b: [Double]) -> Double {
-        var result = 0.0
-        for i in 0..<a.count {
-            var sum = 0.0
-            for j in 0..<b.count {
-                sum += a[i][j] * b[j]
-            }
-            result += sum
-        }
-        return result
-    }
-}
+The feedForward(inputs:) method takes an array of input values and returns the output of the neural network for those inputs. It does this by first computing the dot product of the weights and the inputs using the dotProduct(_:_:) method and then passing the result through the sigmoid activation function using the sigmoid(_:) method.
 
-// Training the neural network on a simple dataset
-let dataset = [
-    ([0.0, 0.0], 0.0),
-    ([0.0, 1.0], 1.0),
-    ([1.0, 0.0], 1.0),
-    ([1.0, 1.0], 0.0)
-]
+The train(inputs:target:learningRate:) method takes an array of input values, a target output value, and a learning rate as input. It first computes the output of the network for the given inputs using the feedForward(inputs:) method. It then computes the error between the target output and the actual output. Finally, it updates the weights of the network using the error and the learning rate.
 
-let learningRate = 0.1
-let epochs = 10000
-let network = NeuralNetwork()
+The sigmoid(_:) method implements the sigmoid activation function, which is used to squash the output of the network between 0 and 1.
 
-for _ in 0..<epochs {
-    for example in dataset {
-        network.train(inputs: example.0, target: example.1, learningRate: learningRate)
-    }
-}
+The dotProduct(_:_:) method computes the dot product of a 2D array and a 1D array.
 
-// Testing the neural network on new inputs
-let inputs1 = [1.0, 0.0]
-let expectedOutput1 = 1.0
-let output1 = network.feedForward(inputs: inputs1)
-print("The neural network output for \(inputs1) is \(output1). Expected output is \(expectedOutput1)")
+The neural network is trained on a simple dataset dataset consisting of four input-output pairs.
 
-let inputs2 = [0.0, 0.0]
-let expectedOutput2 = 0.0
-let output2 = network.feedForward(inputs: inputs2)
-print("The neural network output for \(inputs2) is \(output2). Expected output is \(expectedOutput2)")
-
-let inputs3 = [0.0, 1.0]
-let expectedOutput3 = 1.0
-let output3 = network.feedForward(inputs: inputs3)
-print("The neural network output for \(inputs3) is \(output3). Expected output is \(expectedOutput3)")
+The network is tested on three new inputs, and the output of the network is compared to the expected output. The output is printed to the console along with the expected output.
