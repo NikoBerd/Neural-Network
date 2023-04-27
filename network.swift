@@ -1,6 +1,6 @@
 import Foundation
 
-// Define the neural network model
+// Defining the neural network model
 class NeuralNetwork {
     var weights: [[Double]]
     
@@ -44,7 +44,7 @@ class NeuralNetwork {
     }
 }
 
-// Train the neural network on a simple dataset
+// Training the neural network on a simple dataset
 let dataset = [
     ([0.0, 0.0], 0.0),
     ([0.0, 1.0], 1.0),
@@ -62,7 +62,7 @@ for _ in 0..<epochs {
     }
 }
 
-// Test the neural network on new inputs
+// Testing the neural network on new inputs
 let inputs1 = [1.0, 0.0]
 let expectedOutput1 = 1.0
 let output1 = network.feedForward(inputs: inputs1)
@@ -77,7 +77,5 @@ let inputs3 = [0.0, 1.0]
 let expectedOutput3 = 1.0
 let output3 = network.feedForward(inputs: inputs3)
 print("The neural network output for \(inputs3) is \(output3). Expected output is \(expectedOutput3)")
-
-
 
 
